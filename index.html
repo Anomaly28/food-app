@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>FOOD APP</title>
+<style>
+* { font-size: 40px; }
+body { background-color: azure; }
+input[type=radio] { width: 2%; height: 0.6em; }
+</style>
+</head>
+<body>
+<center>
+<h1>FOOD APP</h1>
+<form onsubmit="show(event)">
+    <input type="text" id="name" placeholder="Enter your name" />
+    <br/><br/>
+    <input type="radio" name="f" id="ni" value="North Indian" /> North Indian
+    <input type="radio" name="f" id="si" value="South Indian" /> South Indian
+    <input type="radio" name="f" id="ff" value="Fast Food" /> Fast Food
+    <br/><br/>
+    <input type="submit" />
+</form>
+<h2 id="msg"></h2>
+<script>
+function show(event) {
+    event.preventDefault(); // Prevent form submission
+
+    let name = document.getElementById("name");
+    let ni = document.getElementById("ni");
+    let si = document.getElementById("si");
+    let ff = document.getElementById("ff");
+    let msg = document.getElementById("msg");
+
+    // Name validation
+    if (name.value === "") {
+        alert("Please enter your name");
+        msg.innerHTML = "";
+        name.focus();
+        return;
+    }
+    if (!name.value.match("^[A-Za-z ]{2,50}$")) {
+        alert("Name should contain only alphabets and spaces");
+        msg.innerHTML = "";
+        name.focus();
+        return;
+    }
+
+    // Food choice selection validation
+    let choice = "";
+    if (ni.checked) choice = "North Indian";
+    else if (si.checked) choice = "South Indian";
+    else if (ff.checked) choice = "Fast Food";
+    else {
+        alert("Please select a food option");
+        return;
+    }
+
+    // Display result
+    let ans = "Name = " + name.value + "   Choice = " + choice;
+    msg.innerHTML = ans;
+}
+</script>
+</center>
+</body>
+</html>
